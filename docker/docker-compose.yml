@@ -1,0 +1,41 @@
+
+services:
+  db:
+    image: postgres:latest
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - learnhub_go_postgres_data:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
+    container_name: 'learnhub-go-api-db-1'
+
+  redis:
+    image: redis:latest
+    restart: unless-stopped
+    volumes:
+      - learnhub_go_redis_data:/data
+    ports:
+      - '6379:6379'
+    container_name: 'learnhub-go-api-redis-1'
+
+  # app:
+  #   build:
+  #     context: ..
+  #     dockerfile: docker/Dockerfile
+  #   container_name: learnhub-go-api-app
+  #   depends_on:
+  #     - db
+  #     - redis
+  #   ports:
+  #     - "8080:8080"
+  #   env_file:
+  #     - ../.env
+
+volumes:
+  learnhub_go_postgres_data:
+  learnhub_go_redis_data:
+

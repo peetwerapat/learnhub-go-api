@@ -32,7 +32,6 @@ func InitRouter() *gin.Engine {
 	userUC := usecase.NewUserUsecase(userRepo)
 
 	// Init controllers
-	controller.NewUserController(r, userUC)
 	controller.NewAuthController(r, userUC)
 
 	return r

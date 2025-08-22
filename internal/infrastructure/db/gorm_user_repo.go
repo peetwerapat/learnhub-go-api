@@ -1,6 +1,8 @@
 package db
 
 import (
+	"errors"
+
 	"github.com/peetwerapat/learnhub-go-api/internal/domain"
 	"github.com/peetwerapat/learnhub-go-api/internal/interface/repository"
 	"gorm.io/gorm"
@@ -25,7 +27,19 @@ func (r *GormUserRepository) GetUserById(id uint) (*domain.User, error) {
 		Email:     u.Email,
 		FirstName: u.FirstName,
 		LastName:  u.LastName,
+		Password:  u.Password,
 	}, nil
+}
+
+func (r *GormUserRepository) GetUserByEmail(email string) (*domain.User, error) {
+	var u domain.User
+	err := r.DB.Where("email = ?", email).First(&u).Error
+	if errors.Is(err, gorm.ErrRecordNotFound) {
+		return nil, nil
+	}
+
+	return &u, nil
+
 }
 
 func (r *GormUserRepository) CreateUser(user *domain.User) error {

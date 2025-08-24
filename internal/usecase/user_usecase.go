@@ -64,7 +64,7 @@ func (uc *UserUsecase) Login(email, password string) (string, error) {
 		return "", ErrInvalidPassword
 	}
 
-	token, err := myJwt.CreateToken(email, 24*time.Hour)
+	token, err := myJwt.CreateToken(user, 24*time.Hour)
 	if err != nil {
 		return "", ErrTokenCreation
 	}

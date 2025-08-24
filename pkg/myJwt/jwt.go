@@ -5,11 +5,12 @@ import (
 	"time"
 
 	"github.com/golang-jwt/jwt/v5"
+	"github.com/peetwerapat/learnhub-go-api/internal/domain"
 )
 
-var jwtKey = []byte(getJWTSecret())
+var jwtKey = []byte(GetJWTSecret())
 
-func getJWTSecret() string {
+func GetJWTSecret() string {
 	secret := os.Getenv("JWT_SECRET")
 	if secret == "" {
 		secret = "default_secret"
@@ -18,17 +19,19 @@ func getJWTSecret() string {
 }
 
 type Claims struct {
+	ID    uint   `json:"id"`
 	Email string `json:"email"`
 	jwt.RegisteredClaims
 }
 
-func CreateToken(email string, expiration time.Duration) (string, error) {
+func CreateToken(user *domain.User, expiration time.Duration) (string, error) {
 	claims := &Claims{
-		Email: email,
+		ID:    user.ID,
+		Email: user.Email,
 		RegisteredClaims: jwt.RegisteredClaims{
 			ExpiresAt: jwt.NewNumericDate(time.Now().Add(expiration)),
 		},
 	}
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
-	return token.SignedString(jwtKey)
+	return token.SignedString([]byte(GetJWTSecret()))
 }

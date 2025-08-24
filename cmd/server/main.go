@@ -14,7 +14,7 @@ import (
 // @version 1.0
 // @description This is LearnHub API documentation.
 // @BasePath /
-// @securityDefinitions.apikey BearerAuth
+// @securityDefinitions.apikey ApiKeyAuth
 // @in header
 // @name Authorization
 func main() {

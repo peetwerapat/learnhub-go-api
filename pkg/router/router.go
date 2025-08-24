@@ -27,12 +27,15 @@ func InitRouter() *gin.Engine {
 
 	// Init repositories
 	userRepo := db.NewGormUserRepository(config.DB)
+	contentRepo := db.NewGormContentRepository(config.DB)
 
 	// Init usecases
 	userUC := usecase.NewUserUsecase(userRepo)
+	contentUC := usecase.NewContentUsecase(contentRepo)
 
 	// Init controllers
 	controller.NewAuthController(r, userUC)
+	controller.NewContentController(r, contentUC)
 
 	return r
 }

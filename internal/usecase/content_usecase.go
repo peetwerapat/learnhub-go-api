@@ -16,3 +16,11 @@ func NewContentUsecase(repo repository.ContentRepository) *ContentUsecase {
 func (uc *ContentUsecase) CreateContent(content *domain.Content) error {
 	return uc.contentRepo.CreateContent(content)
 }
+
+func (uc *ContentUsecase) GetContents() ([]domain.Content, error) {
+	return uc.contentRepo.GetContents()
+}
+
+func (uc *ContentUsecase) GetContentById(id string) (*domain.Content, error) {
+	return uc.contentRepo.GetContentById(id)
+}

@@ -32,9 +32,9 @@ func (r *GormContentRepository) GetContents() ([]domain.Content, error) {
 	return contents, nil
 }
 
-func (r *GormContentRepository) GetContentById(id uint) (*domain.Content, error) {
+func (r *GormContentRepository) GetContentById(id string) (*domain.Content, error) {
 	var c domain.Content
-	if err := r.DB.First(&c, id).Error; err != nil {
+	if err := r.DB.Preload("User").First(&c, id).Error; err != nil {
 		return nil, err
 	}
 

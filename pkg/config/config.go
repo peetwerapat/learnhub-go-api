@@ -23,8 +23,8 @@ func Load() *Config {
 
 	cfg := &Config{
 		DBHost:     os.Getenv("DB_HOST"),
-		DBUser:     os.Getenv("DB_USERNAME"),
-		DBPassword: os.Getenv("DB_PASSWORD"),
+		DBUser:     os.Getenv("DB_USER"),
+		DBPassword: os.Getenv("DB_PASS"),
 		DBName:     os.Getenv("DB_NAME"),
 		DBPort:     os.Getenv("DB_PORT"),
 		AppPort:    os.Getenv("APP_PORT"),

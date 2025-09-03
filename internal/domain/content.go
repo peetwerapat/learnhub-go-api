@@ -12,11 +12,11 @@ type Content struct {
 	CreatorName  string     `gorm:"column:creator_name" json:"creatorName"`
 	UserID       int        `gorm:"column:user_id"`
 	User         User       `gorm:"foreignKey:UserID" json:"user"`
-	CreatedAt    time.Time  `gorm:"column:created_at" json:"createdAt"`
-	UpdatedAt    time.Time  `gorm:"column:updated_at" json:"updatedAt"`
-	DeletedAt    *time.Time `gorm:"column:deleted_at" json:"deletedAt"`
+	CreatedAt    time.Time  `gorm:"column:created_at"`
+	UpdatedAt    *time.Time `gorm:"column:updated_at"`
+	DeletedAt    *time.Time `gorm:"column:deleted_at"`
 }
 
 func (Content) TableName() string {
-	return "TB_CONTENT"
+	return "tb_content"
 }

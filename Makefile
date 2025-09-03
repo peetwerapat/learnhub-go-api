@@ -30,4 +30,12 @@ migrate-reset:
 	migrate -path $(MIGRATIONS_PATH) -database "$(DB_URL)" down
 	migrate -path $(MIGRATIONS_PATH) -database "$(DB_URL)" up
 
-.PHONY: migrate-up migrate-down migrate-force migrate-reset
+# -----------------------
+# Create new migration file
+# -----------------------
+create-migration:
+	@echo "Enter migration name:"; \
+	read name; \
+	migrate create -ext sql -dir $(MIGRATIONS_PATH) -seq $$name
+
+.PHONY: migrate-up migrate-down migrate-force migrate-reset create-migration

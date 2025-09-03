@@ -1,4 +1,4 @@
-package db
+package repository
 
 import (
 	"errors"
@@ -26,13 +26,7 @@ func (r *GormUserRepository) GetUserById(id uint) (*domain.User, error) {
 		return nil, err
 	}
 
-	return &domain.User{
-		ID:        u.ID,
-		Email:     u.Email,
-		FirstName: u.FirstName,
-		LastName:  u.LastName,
-		Password:  u.Password,
-	}, nil
+	return &u, nil
 }
 
 func (r *GormUserRepository) GetUserByEmail(email string) (*domain.User, error) {

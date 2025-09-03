@@ -1,4 +1,4 @@
-package db
+package repository
 
 import (
 	"github.com/peetwerapat/learnhub-go-api/internal/domain"

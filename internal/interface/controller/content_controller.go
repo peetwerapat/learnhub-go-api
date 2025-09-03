@@ -7,7 +7,6 @@ import (
 	"github.com/peetwerapat/learnhub-go-api/internal/domain"
 	"github.com/peetwerapat/learnhub-go-api/internal/interface/controller/dto"
 	"github.com/peetwerapat/learnhub-go-api/internal/usecase"
-	"github.com/peetwerapat/learnhub-go-api/pkg/middleware"
 	"github.com/peetwerapat/learnhub-go-api/pkg/oembed"
 	"github.com/peetwerapat/learnhub-go-api/pkg/response"
 )
@@ -16,12 +15,8 @@ type ContentController struct {
 	contentUC *usecase.ContentUsecase
 }
 
-func NewContentController(r *gin.Engine, uc *usecase.ContentUsecase) {
-	ctrl := &ContentController{contentUC: uc}
-
-	r.POST("/contents", middleware.AuthMiddleware(), ctrl.CreateContent)
-	r.GET("/contents", ctrl.GetContents)
-	r.GET("/contents/:id", ctrl.GetContenById)
+func NewContentController(uc *usecase.ContentUsecase) *ContentController {
+	return &ContentController{contentUC: uc}
 }
 
 // @Summary Create Content
